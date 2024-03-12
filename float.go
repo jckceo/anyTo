@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"math"
 	"strconv"
-	"strings"
 )
 
 func Float(n interface{}) float64 {
@@ -20,16 +19,11 @@ func Float(n interface{}) float64 {
 	case int64:
 		return float64(v)
 	case string:
-		s := removeUnicodeChars(v)    // Remove spaces, tabs, newlines, etc.
-		if strings.Contains(s, ",") { // Remove commas
-			s = strings.Replace(s, ".", "", -1) // Remove the period used as thousands separator
-			s = strings.Replace(s, ",", ".", 1) // Replace the comma with a period
-		}
-
+		s := parseString(v)
 		f, err := strconv.ParseFloat(s, 64)
 		if err != nil {
 			fmt.Printf("String: %s - Error: %s\n", s, err.Error())
-			f = 0
+			return 0
 		}
 		return f
 	}

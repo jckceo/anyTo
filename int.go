@@ -1,6 +1,7 @@
 package anyTo
 
 import (
+	"fmt"
 	"strconv"
 )
 
@@ -35,8 +36,10 @@ func Int(n interface{}) int {
 	case float64:
 		return int(v)
 	case string:
-		f, err := strconv.ParseFloat(removeUnicodeChars(v), 64)
+		s := parseString(v)
+		f, err := strconv.ParseFloat(removeUnicodeChars(s), 64)
 		if err != nil {
+			fmt.Printf("String: %s - Error: %s\n", s, err.Error())
 			return 0
 		}
 		return int(f)
