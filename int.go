@@ -1,0 +1,45 @@
+package anyTo
+
+import (
+	"strconv"
+)
+
+func Int(n interface{}) int {
+	max := int(^uint(0) >> 1)
+
+	switch v := n.(type) {
+	case int:
+		return v
+	case int8:
+		return int(v)
+	case int16:
+		return int(v)
+	case int32:
+		return int(v)
+	case int64:
+		return int(v)
+	case uint:
+		return int(v)
+	case uint8:
+		return int(v)
+	case uint16:
+		return int(v)
+	case uint32:
+		return int(v)
+	case uint64:
+		if v <= uint64(max) {
+			return int(v)
+		}
+	case float32:
+		return int(v)
+	case float64:
+		return int(v)
+	case string:
+		f, err := strconv.ParseFloat(removeUnicodeChars(v), 64)
+		if err != nil {
+			return 0
+		}
+		return int(f)
+	}
+	return 0
+}
