@@ -1,7 +1,6 @@
 package anyTo
 
 import (
-	"fmt"
 	"math"
 	"strconv"
 )
@@ -22,7 +21,6 @@ func Float(n interface{}) float64 {
 		s := parseString(v)
 		f, err := strconv.ParseFloat(s, 64)
 		if err != nil {
-			fmt.Printf("String: %s - Error: %s\n", s, err.Error())
 			return 0
 		}
 		return f
