@@ -28,6 +28,10 @@ func Float(n interface{}) float64 {
 	return 0.00
 }
 
-func TwoDecimal(num float64) float64 {
-	return math.Round(num*100) / 100
+func Float2Decimal(n interface{}) float64 {
+	return math.Round(Float(n)*100) / 100
+}
+
+func Float4Decimal(n interface{}) float64 {
+	return math.Round(Float(n)*10000) / 10000
 }
